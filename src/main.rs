@@ -1,5 +1,6 @@
+use adw::Application;
 use gtk::prelude::*;
-use gtk::{Application, ApplicationWindow, Button};
+use gtk::{ApplicationWindow, Button};
 const APP_ID: &str = "org.gtk_rs.HelloWorld3";
 
 fn main() {

@@ -9,5 +9,6 @@ repository = "https://github.com/sorcerersr/sorpho"
 readme = "README.md"
 
 [dependencies]
+adw = { version = "0.2.1", package = "libadwaita" }
 gtk = { version = "0.5.5", package = "gtk4", features = ["v4_8"] }
 
