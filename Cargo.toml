@@ -9,14 +9,5 @@ repository = "https://github.com/sorcerersr/sorpho"
 readme = "README.md"
 
 [dependencies]
-egui = "0.20.0"
-eframe = { version = "0.20.0", default-features = false, features = [
-    "default_fonts", # Embed the default egui fonts.
-    "glow",          # rendering backend
-    "persistence",   # Enable restoring app state when restarting the app.
-] }
+gtk = { version = "0.5.5", package = "gtk4", features = ["v4_8"] }
 
-# for app persistence:
-serde = { version = "1", features = ["derive"] }
-
-tracing-subscriber = "0.3"

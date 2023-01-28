@@ -1,37 +1,41 @@
-#![cfg_attr(not(debug_assertions), windows_subsystem = "windows")] // hide console window on Windows in release
-
-use eframe::egui;
+use gtk::prelude::*;
+use gtk::{Application, ApplicationWindow, Button};
+const APP_ID: &str = "org.gtk_rs.HelloWorld3";
 
 fn main() {
-    // Log to stdout (if you run with `RUST_LOG=debug`).
-    tracing_subscriber::fmt::init();
+    // Create a new application
+    let app = Application::builder().application_id(APP_ID).build();
 
-    let options = eframe::NativeOptions {
-        initial_window_size: Some(egui::vec2(640.0, 480.0)),
-        ..Default::default()
-    };
-    eframe::run_native(
-        "sorpho",
-        options,
-        Box::new(|_cc| Box::new(Sorpho::default())),
-    )
+    // Connect to "activate" signal of `app`
+    app.connect_activate(build_ui);
+
+    // Run the application
+    app.run();
 }
 
-struct Sorpho {
-    
-}
+fn build_ui(app: &Application) {
+    // Create a button with label and margins
+    let button = Button::builder()
+        .label("Press me!")
+        .margin_top(12)
+        .margin_bottom(12)
+        .margin_start(12)
+        .margin_end(12)
+        .build();
 
-impl Default for Sorpho {
-    fn default() -> Self {
-        Self {        }
-    }
-}
+    // Connect to "clicked" signal of `button`
+    button.connect_clicked(|button| {
+        // Set the label to "Hello World!" after the button has been clicked on
+        button.set_label("Hello World!");
+    });
 
-impl eframe::App for Sorpho {
-    fn update(&mut self, ctx: &egui::Context, _frame: &mut eframe::Frame) {
-        egui::CentralPanel::default().show(ctx, |ui| {
-            ui.heading("Sorpho");
+    // Create a window
+    let window = ApplicationWindow::builder()
+        .application(app)
+        .title("My GTK App")
+        .child(&button)
+        .build();
 
-        });
-    }
+    // Present window
+    window.present();
 }
