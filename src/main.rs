@@ -1,42 +1,43 @@
-use adw::Application;
-use gtk::prelude::*;
-use gtk::{ApplicationWindow, Button};
-const APP_ID: &str = "org.gtk_rs.HelloWorld3";
+use iced::widget::{column, container, text};
+use iced::{alignment, Color, Element, Length, Sandbox, Settings};
 
-fn main() {
-    // Create a new application
-    let app = Application::builder().application_id(APP_ID).build();
-
-    // Connect to "activate" signal of `app`
-    app.connect_activate(build_ui);
-
-    // Run the application
-    app.run();
+pub fn main() -> iced::Result {
+    Sorpho::run(Settings::default())
 }
 
-fn build_ui(app: &Application) {
-    // Create a button with label and margins
-    let button = Button::builder()
-        .label("Press me!")
-        .margin_top(12)
-        .margin_bottom(12)
-        .margin_start(12)
-        .margin_end(12)
-        .build();
+#[derive(Default)]
+struct Sorpho {}
 
-    // Connect to "clicked" signal of `button`
-    button.connect_clicked(|button| {
-        // Set the label to "Hello World!" after the button has been clicked on
-        button.set_label("Hello World!");
-    });
+#[derive(Debug, Clone)]
+enum Message {}
 
-    // Create a window
-    let window = ApplicationWindow::builder()
-        .application(app)
-        .title("My GTK App")
-        .child(&button)
-        .build();
+impl Sandbox for Sorpho {
+    type Message = Message;
 
-    // Present window
-    window.present();
+    fn new() -> Self {
+        Sorpho::default()
+    }
+
+    fn title(&self) -> String {
+        String::from("Sorpho")
+    }
+
+    fn update(&mut self, _message: Message) {}
+
+    fn view(&self) -> Element<Message> {
+        let title = text("Sorpho")
+            .width(Length::Fill)
+            .size(100)
+            .style(Color::from([0.5, 0.5, 0.5]))
+            .horizontal_alignment(alignment::Horizontal::Center);
+
+        let content = column![title].spacing(20).max_width(800);
+
+        container(content)
+            .width(Length::Fill)
+            .height(Length::Fill)
+            .center_x()
+            .center_y()
+            .into()
+    }
 }
