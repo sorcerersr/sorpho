@@ -1,5 +1,5 @@
 use iced::widget::{column, container, text};
-use iced::{alignment, Color, Element, Length, Sandbox, Settings};
+use iced::{alignment, Color, Element, Length, Sandbox, Settings, Theme};
 
 pub fn main() -> iced::Result {
     Sorpho::run(Settings::default())
@@ -39,5 +39,9 @@ impl Sandbox for Sorpho {
             .center_x()
             .center_y()
             .into()
+    }
+
+    fn theme(&self) -> Theme {
+        Theme::Dark
     }
 }
