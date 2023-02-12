@@ -1,5 +1,5 @@
 use iced::widget::{column, container, text};
-use iced::{alignment, Color, Element, Length, Sandbox, Settings, Theme};
+use iced::{alignment, Element, Length, Sandbox, Settings, Theme};
 
 pub fn run() -> iced::Result {
     Sorpho::run(Settings::default())
@@ -28,7 +28,6 @@ impl Sandbox for Sorpho {
         let title = text("Sorpho")
             .width(Length::Fill)
             .size(100)
-            .style(Color::from([0.5, 0.5, 0.5]))
             .horizontal_alignment(alignment::Horizontal::Center);
 
         let content = column![title].spacing(20).max_width(800);
