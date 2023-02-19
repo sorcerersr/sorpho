@@ -9,5 +9,11 @@ repository = "https://github.com/sorcerersr/sorpho"
 readme = "README.md"
 
 [dependencies]
-iced = "0.7.0"
+env_logger = "0.10"
+log = "0.4"
+iced = "0.8.0"
+xdg = "2.4.1"
+dirs = "4.0.0"
+serde = { version = "1.0", features = ["derive"] }
+toml = "0.7.2"
 
