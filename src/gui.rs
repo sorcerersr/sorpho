@@ -38,12 +38,20 @@ impl Sandbox for Sorpho {
     fn update(&mut self, _message: Message) {}
 
     fn view(&self) -> Element<Message> {
-        let title = text("top text").width(Length::Fill).size(50);
+        let title = text("top text")
+            .width(Length::Fill)
+            .height(Length::Shrink)
+            .size(50);
+        let lefttext = text("left text")
+            .width(Length::Fill)
+            .height(Length::Fill)
+            .size(50);
+        let righttext = text("right text")
+            .width(Length::Fill)
+            .height(Length::Fill)
+            .size(50);
 
-        let toptext = text("left text").width(Length::Fill).size(50);
-        let bottomtext = text("right text").width(Length::Fill).size(50);
-
-        let content: Element<_> = column![title, row![toptext, bottomtext]].into();
+        let content: Element<_> = column![title, row![lefttext, righttext]].into();
 
         container(if self.debug {
             content.explain(Color::BLACK)
@@ -52,8 +60,7 @@ impl Sandbox for Sorpho {
         })
         .width(Length::Fill)
         .height(Length::Fill)
-        .center_x()
-        .center_y()
+        .align_y(iced::alignment::Vertical::Top)
         .into()
     }
 
